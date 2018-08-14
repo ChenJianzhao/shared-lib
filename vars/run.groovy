@@ -3,7 +3,7 @@
  * 2018/8/13
  */
 
-def call(body) {
+def call() {
 
     pipeline {
         agent any
