@@ -12,11 +12,11 @@ def call() {
             maven 'Maven 3.5.3' // 需要现在全局配置中设置，可以选取已安装的，也可以配置自动安装
         }
         // properties or parameters? try one!
-        parameters {
-            string defaultValue: 'master', description: 'shared library 分支', name: 'LIB_VERSION', trim: true
-            string defaultValue: 'openresty/nginx/conf/vhosts/corp_product.conf', description: 'nginxConfigLocation', name: 'nginxConfigLocation', trim: false
-            choice choices: ['none', 'jgitflow:release-start', 'jgitflow:release-finish'], description: '', name: 'jgitflowFlag'
-        }
+//        parameters {
+//            string defaultValue: 'master', description: 'shared library 分支', name: 'LIB_VERSION', trim: true
+//            string defaultValue: 'openresty/nginx/conf/vhosts/corp_product.conf', description: 'nginxConfigLocation', name: 'nginxConfigLocation', trim: false
+//            choice choices: ['none', 'jgitflow:release-start', 'jgitflow:release-finish'], description: '', name: 'jgitflowFlag'
+//        }
 //        options {
 //            skipDefaultCheckout true
 //        }
