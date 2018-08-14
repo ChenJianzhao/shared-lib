@@ -26,6 +26,7 @@ def call() {
                     sh 'echo "$MAVEN_HOME"'
                     sh 'echo "$PATH"'
                     sh "mvn -version"
+                    echo "shared-lib branch develop"
                 }
             }
             stage('Build Project') {
