@@ -13,24 +13,14 @@ def call() {
         }
         // properties or parameters? try one!
         parameters {
+            string defaultValue: 'master', description: 'shared library 分支', name: 'LIB_VERSION', trim: true
             string defaultValue: 'openresty/nginx/conf/vhosts/corp_product.conf', description: 'nginxConfigLocation', name: 'nginxConfigLocation', trim: false
             choice choices: ['none', 'jgitflow:release-start', 'jgitflow:release-finish'], description: '', name: 'jgitflowFlag'
         }
-        options {
-            skipDefaultCheckout true
-        }
+//        options {
+//            skipDefaultCheckout true
+//        }
         stages {
-            stage('Checkout SCM') {
-                steps {
-                    checkout([$class: 'GitSCM',
-                              branches: [[name: '*/feature/ext-jenkinsfile']],
-                              doGenerateSubmoduleConfigurations: false,
-                              extensions: [],
-                              submoduleCfg: [],
-                              userRemoteConfigs: [[credentialsId: 'jenkins-username-password-for-github',
-                                                   url: 'https://github.com/ChenJianzhao/jenkins-demo.git']]])
-                }
-            }
             stage('Check Environment') {
                 steps {
                     sh 'echo "$MAVEN_HOME"'
@@ -43,12 +33,13 @@ def call() {
                     mvnBasicArgs = "-e -B -f pom.xml -Dmaven.javadoc.skip=true"
                 }
                 steps {
-                    library identifier: 'shared-library@master', retriever: modernSCM(
-                            [$class: 'GitSCMSource',
-                             credentialsId: 'username-password-for-github',
-                             id: 'c67f6abb-dca9-467c-92ef-b6fa4a745110',
-                             remote: 'https://github.com/ChenJianzhao/shared-library.git',
-                             traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]])
+
+//                    library identifier: 'shared-lib@master', retriever: modernSCM(
+//                            [$class: 'GitSCMSource',
+//                             credentialsId: 'username-password-for-github',
+//                             id: 'c67f6abb-dca9-467c-92ef-b6fa4a745110',
+//                             remote: 'https://github.com/ChenJianzhao/shared-library.git',
+//                             traits: [[$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait']]])
 
                     // 调用 shared lib
                     buildPlugin()
