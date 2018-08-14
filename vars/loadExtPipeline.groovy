@@ -13,7 +13,7 @@ def call() {
         }
         // properties or parameters? try one!
         parameters {
-            string defaultValue: '', description: 'nginxConfigLocation', name: 'nginxConfigLocation', trim: false
+            string defaultValue: 'openresty/nginx/conf/vhosts/corp_product.conf', description: 'nginxConfigLocation', name: 'nginxConfigLocation', trim: false
             choice choices: ['none', 'jgitflow:release-start', 'jgitflow:release-finish'], description: '', name: 'jgitflowFlag'
         }
         options {
