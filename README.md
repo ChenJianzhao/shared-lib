@@ -1,25 +1,23 @@
 
-First of all,
+### 脚本片段生成助手
 
-`def branch = ${BRANCH_NAME}`
+[Snippet Generator](http://192.168.1.200:8080/job/product-service/job/feature%252Fjenkins-cd/pipeline-syntax/)
 
-is not valid Groovy, or at least not doing what you think. Perhaps you meant
+### 变量的使用
 
-`def branch = "${BRANCH_NAME}"`
+- groovy 解析全局变量必须包含在双引号中
+ 
+    `def branch = "${BRANCH_NAME}"`
+    
+- 如果不用双引号，则可以使用 `env.BRANCH_NAME` 取到全局变量
 
-which would just be a silly way of writing
+    `def branch = env.BRANCH_NAME`
 
-`def branch = BRANCH_NAME`
 
-Anyway environment variables are not currently accessible directly as Groovy variables in Pipeline (there is a proposal to allow it); you need to use the env global variable:
-
-`def branch = env.BRANCH_NAME`
-
-From within an external process, such as a sh step, it is an actual environment variable, so
-
-`sh 'echo $BRANCH_NAME'`
-
-简而言之
-- groovy 解析变量必须包含在双引号中 `"${BRANCH_NAME}"`
-- 如果不用双引号定义变量，则可以使用 `env.BRANCH_NAME` 取到全局变量
 - 如果使用 `sh` 等外部程序，可以直接使用 `$BRANCH_NAME`，因为其本身就是一个环境变量
+
+    `sh 'echo $BRANCH_NAME'`
+    
+- 使用构建参数
+
+    `def libVersion = "${params.LIB_VERSION}"`
